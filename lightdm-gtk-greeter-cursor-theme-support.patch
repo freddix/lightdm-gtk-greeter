@@ -1,0 +1,40 @@
+diff -aurN lightdm-gtk-greeter-1.6.0.orig/data/lightdm-gtk-greeter.conf lightdm-gtk-greeter-1.6.0/data/lightdm-gtk-greeter.conf
+--- lightdm-gtk-greeter-1.6.0.orig/data/lightdm-gtk-greeter.conf	2013-08-06 21:17:43.774543047 +0200
++++ lightdm-gtk-greeter-1.6.0/data/lightdm-gtk-greeter.conf	2013-08-06 21:23:20.343550723 +0200
+@@ -17,6 +17,7 @@
+ #background=
+ #theme-name=
+ #icon-theme-name=
++#cursor-theme-name=
+ #font-name=
+ #xft-antialias=
+ #xft-dpi=
+diff -aurN lightdm-gtk-greeter-1.6.0.orig/src/lightdm-gtk-greeter.c lightdm-gtk-greeter-1.6.0/src/lightdm-gtk-greeter.c
+--- lightdm-gtk-greeter-1.6.0.orig/src/lightdm-gtk-greeter.c	2013-08-06 21:17:43.774543047 +0200
++++ lightdm-gtk-greeter-1.6.0/src/lightdm-gtk-greeter.c	2013-08-06 21:31:49.151956121 +0200
+@@ -42,7 +42,7 @@
+ static gchar *state_filename;
+ 
+ /* Defaults */
+-static gchar *default_font_name, *default_theme_name, *default_icon_theme_name;
++static gchar *default_font_name, *default_theme_name, *default_icon_theme_name, *default_cursor_theme_name;
+ static GdkPixbuf *default_background_pixbuf = NULL;
+ 
+ /* Panel Widgets */
+@@ -1550,6 +1550,16 @@
+     g_object_get (gtk_settings_get_default (), "gtk-icon-theme-name", &default_icon_theme_name, NULL);
+     g_debug ("Default theme is '%s'", default_icon_theme_name);
+ 
++    value = g_key_file_get_value (config, "greeter", "cursor-theme-name", NULL);
++    if (value)
++    {
++        g_debug ("Using cursor icon theme %s", value);
++        g_object_set (gtk_settings_get_default (), "gtk-cursor-theme-name", value, NULL);
++    }
++    g_free (value);
++    g_object_get (gtk_settings_get_default (), "gtk-cursor-theme-name", &default_icon_theme_name, NULL);
++    g_debug ("Default cursor theme is '%s'", default_cursor_theme_name);
++
+     value = g_key_file_get_value (config, "greeter", "font-name", NULL);
+     if (value)
+     {

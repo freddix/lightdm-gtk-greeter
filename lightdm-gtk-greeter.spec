@@ -1,11 +1,11 @@
 Summary:	GTK+ greeter for LightDM
 Name:		lightdm-gtk-greeter
-Version:	1.7.1
+Version:	1.6.1
 Release:	1
 License:	GPL v3
 Group:		Themes
-Source0:	https://launchpad.net/lightdm-gtk-greeter/1.7/%{version}/+download/%{name}-%{version}.tar.gz
-# Source0-md5:	3d3747ca83fc72ceb47046777292b405
+Source0:	https://launchpad.net/lightdm-gtk-greeter/1.6/%{version}/+download/%{name}-%{version}.tar.gz
+# Source0-md5:	a51619d8f85534c22c6d13c8f970fa81
 Source1:	background.png
 Patch0:		%{name}-config.patch
 URL:		https://launchpad.net/lightdm-gtk-greeter
@@ -70,5 +70,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/%{name}
 %{_datadir}/xgreeters/%{name}.desktop
 %{_pixmapsdir}/lightdm_bg.png
-%{_iconsdir}/hicolor/*/places/*.svg
+#%{_IConsdir}/hicolor/*/places/*.svg
 
